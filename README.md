@@ -1,90 +1,120 @@
-# Golf Ball Tracking with YOLOv7
+# Golf Ball Tracking with YOLOv7 and YOLOv9
 
-This project fine-tunes the YOLOv7 object detection model to detect golf balls in videos of golf swings. The goal is to create a lightweight golf ball tracking system using computer vision.
+This project focuses on fine-tuning YOLOv7 and YOLOv9 object detection models to track golf balls in videos of golf swings. The goal is to create a lightweight and efficient golf ball tracking system using computer vision techniques.
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Dataset](#dataset)
+- [Training](#training)
+  - [YOLOv7](#yolov7)
+  - [YOLOv9](#yolov9)
+- [Inference](#inference)
+  - [YOLOv7](#yolov7-inference)
+  - [YOLOv9](#yolov9-inference)
+- [Acknowledgments](#acknowledgments)
+- [License](#license)
+
+## Project Overview
+
+Golf ball tracking is a challenging task due to the small size, high speed, and motion blur of the ball in videos. This project leverages state-of-the-art YOLO (You Only Look Once) object detection models to detect and track golf balls, club heads, and fast-moving objects (FMO) in golf swing videos.
+
+The project includes:
+
+- Fine-tuning YOLOv7 and YOLOv9 models on a custom golf ball dataset.
+- Comparing the performance of YOLOv7 and YOLOv9 on golf ball tracking.
+- Evaluating metrics such as Intersection over Union (IoU), precision, and recall.
 
 ## Project Structure
 
-```
-golf-ball-tracking-project/
-├── cfg/
-├── models/
-├── utils/
-├── data/
-│   ├── golf_ball_dataset/
-│   └── golf.yaml
-├── demo_videos/
-├── results/
-├── detect.py
-├── train.py
-├── test.py
-├── requirements.txt
-├── LICENSE.md
-└── README.md
-```
+The Project is structured under the two main folders that contain the code from the official yolo repositories.
+/yolov7/
+/yolov9/yolov9-main/
+
+Other files in those repository are helper files used for creating the grouped data sets for t-test.
+
+The repository also contains a Demo video, the ttest csv.
 
 ## Installation
 
-1. Clone this repository.
-2. (Optional) Create and activate a Python virtual environment.
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/isaacsteiner03/golf-ball-tracking-yolo.git
+   cd golf-ball-tracking
+   ```
+
+2. Optional: Create Virtual Env
+   ```
+   python -m venv venv
+   venv\Scripts\activate  # On Windows
+   ```
 3. Install the required Python packages:
-
-```bash
-pip install -r requirements.txt
-```
-
-4. Download the pretrained YOLOv7 model weights:
-
-```bash
-wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt
-```
-
-Place the `yolov7.pt` file in the project root directory.
+   ```
+   `   pip install -r requirements.txt`
+   ```
+   Download the pretrained YOLOv7 and YOLOv9 model weights
 
 ## Dataset
 
-The golf ball dataset is located under `data/golf_ball_dataset/`, organized in YOLO format:
+The golf ball dataset is organized in YOLO format and includes:
 
-- `images/train/`
-- `images/valid/`
-- `labels/train/`
-- `labels/valid/`
-
-The custom dataset configuration is defined in `data/golf.yaml`.
+images/train/ and labels/train/ for training.
+images/valid/ and labels/valid/ for validation.
+Grouped test datasets under data/grouped_test/.
+The dataset configuration is defined in data/data.yaml
 
 ## Training
 
+YOLOv7
 To fine-tune YOLOv7 on the golf ball dataset:
 
-```bash
-python train.py --workers 8 --device 0 --batch-size 16 --data data/golf.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights yolov7.pt --name golf-ball-finetune --hyp data/hyp.scratch.p5.yaml
+```
+python train.py --weights yolov7.pt --cfg yolov7.yaml --data data/data.yaml --epochs 150
 ```
 
-Training outputs, including the best model checkpoint (`best.pt`), will be saved under `runs/train/golf-ball-finetune/`.
+YOLOv9
+To fine-tune YOLOv9 on the golf ball dataset:
 
-## Inference (Detection)
-
-To run detection on a video using the fine-tuned model:
-
-```bash
-python detect.py --weights runs/train/golf-ball-finetune/weights/best.pt --conf 0.25 --img-size 640 --source path_to_your_video.mp4
+```
+python train.py --weights yolov9-m.pt --cfg yolov9-m.yaml --data data/data.yaml --epochs 150
 ```
 
-Detection results will be saved under the `runs/detect/exp*/` directory.
+Note these are example commands, the actual path will be determined by where your trained model gets saved.
 
-## Results
+## Inference
 
-The project compares:
+YOLOv7 Inference
+To run detection on a video using YOLOv7:
 
-- Baseline YOLOv7 detection performance
-- Fine-tuned YOLOv7 detection performance on golf ball tracking
+```
+python detect.py --weights path/to/yolov7.pt --source path/to/images --conf 0.05
+```
 
-Evaluation metrics include Intersection over Union (IoU), precision, and recall.
+YOLOv9 Inference
+To run detection on a video using YOLOv9:
+
+```
+python val_dual.py --weights yolov9.pt --data data.yaml --task test
+```
+
+Note these are example commands, the actual path will be determined by where your trained model gets saved.
+
+# License
+
+This project is licensed under the GPL-3.0 License. See the LICENSE.md file for details.
 
 ## Acknowledgments
 
-- Original YOLOv7 repository: [https://github.com/WongKinYiu/yolov7](https://github.com/WongKinYiu/yolov7)
-- Roboflow for public datasets
+Original YOLOv7 repository: https://github.com/WongKinYiu/yolov7
+Original YOLOv9 repository: https://github.com/ultralytics/yolov5
+Roboflow for public datasets https://universe.roboflow.com/trungam/golf-fmo/dataset/8.
+License
+This project is licensed under the GPL-3.0 License. See the LICENSE.md file for details.
 
-## License
+## GenAI Prompts and Citation(s):
 
-YOLOv7 is licensed under the GPL-3.0 License. This project maintains attribution to the original authors.
+Prompt: Help me generate a read me for my overall project repository
+Source: Github Copilot (GPT-4o), Result: This File with minor modifications by myself.
