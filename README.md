@@ -59,7 +59,7 @@ The repository also contains a Demo video, the ttest csv.
    Download the pretrained YOLOv7 and YOLOv9 model weights
 
 ## Dataset
-
+- The dataset has been added to the gitignore for this project. To mimic the original project results, you can download the dataset at the link found in the bottom of this readme.
 The golf ball dataset is organized in YOLO format and includes:
 
 images/train/ and labels/train/ for training.
