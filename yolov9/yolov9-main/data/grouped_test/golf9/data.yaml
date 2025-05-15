@@ -1,0 +1,6 @@
+train: /train/images
+val: data/valid/images
+test: data/grouped_test/golf9/images
+
+nc: 3
+names: ['ball', 'club_head', 'fmo_ball']

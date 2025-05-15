@@ -18,4 +18,4 @@ for folder in os.listdir(grouped_dir):
         yaml_path = os.path.join(folder_path, "data.yaml")
         with open(yaml_path, "w") as f:
             f.write(yaml_content)
-        print(f"✅ Created: {yaml_path}")
+        print(f"Created: {yaml_path}")
