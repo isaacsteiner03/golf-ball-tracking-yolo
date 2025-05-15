@@ -29,6 +29,7 @@ The project includes:
 
 ## Project Structure
 
+Final Project Paper can be found in the root folder of this repository, ProjectFinalReport.pdf
 The Project is structured under the two main folders that contain the code from the official yolo repositories.
 /yolov7/
 /yolov9/yolov9-main/
