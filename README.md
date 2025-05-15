@@ -83,7 +83,7 @@ To fine-tune YOLOv9 on the golf ball dataset:
 python train.py --weights yolov9-m.pt --cfg yolov9-m.yaml --data data/data.yaml --epochs 150
 ```
 
-Note these are example commands, the actual path will be determined by where your trained model gets saved.
+Note these are example commands, the actual path will be determined by where you save your data
 
 ## Inference
 
