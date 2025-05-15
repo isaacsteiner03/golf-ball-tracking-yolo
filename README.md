@@ -115,6 +115,11 @@ Roboflow for public datasets https://universe.roboflow.com/trungam/golf-fmo/data
 License
 This project is licensed under the GPL-3.0 License. See the LICENSE.md file for details.
 
+Demo Video Original Source Footage (Pre-Detection) Links:
+https://youtu.be/Ld_2hdSEQCw
+https://youtu.be/w9ISmhUDKUI
+https://www.youtube.com/shorts/p1nTKWeQA8s?feature=share
+
 ## GenAI Prompts and Citation(s):
 
 Prompt: Help me generate a read me for my overall project repository
